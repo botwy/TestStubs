@@ -7,14 +7,6 @@ import java.util.ArrayList;
 public class Storage {
     public static Storage shared = new Storage();
 
-    private Storage() {
-        fillByStubs();
-    }
-
-    private void fillByStubs() {
-        appendProduct(new Product("001", "1111", 300.0));
-    }
-
     private ArrayList<Product> products = new ArrayList<Product>();
 
     public void appendProduct(Product product) {
@@ -27,5 +19,15 @@ public class Storage {
             return null;
         }
         return products.get(size - 1);
+    }
+
+    public Product[] getAllProducts() {
+        int size = products.size();
+        if (size == 0) {
+            return null;
+        }
+        Product[] array = new Product[size];
+
+        return products.toArray(array);
     }
 }

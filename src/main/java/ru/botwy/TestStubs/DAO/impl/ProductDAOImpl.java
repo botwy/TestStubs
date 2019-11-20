@@ -13,4 +13,8 @@ public class ProductDAOImpl implements ProductDAO {
     public Product getLastProduct() {
         return Storage.shared.getLastProduct();
     }
+
+    public Product[] getAllProducts() {
+        return Storage.shared.getAllProducts();
+    }
 }
