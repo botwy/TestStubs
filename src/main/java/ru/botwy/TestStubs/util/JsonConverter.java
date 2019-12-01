@@ -6,4 +6,5 @@ public interface JsonConverter {
     String convertToJson(ProductDTO productDTO);
     String convertToJson(ProductDTO[] productDTOs);
     ProductDTO fromJson(String json);
+    ProductDTO[] fromJsonArray(String json);
 }

@@ -1,7 +1,12 @@
 package ru.botwy.TestStubs;
 
+import ru.botwy.TestStubs.Models.dto.ProductDTO;
 import ru.botwy.TestStubs.Models.entity.Product;
+import ru.botwy.TestStubs.util.JsonConverter;
+import ru.botwy.TestStubs.util.JsonConverterImpl;
+import ru.botwy.TestStubs.util.RequestReader;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -17,6 +22,22 @@ public class Storage {
         ReentrantReadWriteLock rwLock =  new ReentrantReadWriteLock();
         this.readLock = rwLock.readLock();
         this.writeLock =rwLock.writeLock();
+        fillByStubs();
+    }
+
+    private void fillByStubs() {
+        try {
+            JsonConverter converter = new JsonConverterImpl();
+            String json = RequestReader.shared.getContent("WEB-INF/productStub.json");
+            ProductDTO[] dtos = converter.fromJsonArray(json);
+
+            for (ProductDTO dto : dtos) {
+                Product product = new Product(dto.getCode(), dto.getName(), dto.getPrice());
+                products.add(product);
+            }
+        } catch (IOException error) {
+            System.out.println(error);
+        }
     }
 
     public void appendProduct(Product product) {

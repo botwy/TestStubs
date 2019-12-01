@@ -6,6 +6,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import ru.botwy.TestStubs.Models.dto.ProductDTO;
 
+import java.util.ArrayList;
+
 public class JsonConverterImpl implements JsonConverter {
 
     private final Gson gson;
@@ -24,5 +26,9 @@ public class JsonConverterImpl implements JsonConverter {
 
     public ProductDTO fromJson(String json) {
         return gson.fromJson(json, ProductDTO.class);
+    }
+
+    public ProductDTO[] fromJsonArray(String json) {
+        return gson.fromJson(json, ProductDTO[].class);
     }
 }
