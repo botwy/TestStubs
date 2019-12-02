@@ -46,10 +46,11 @@ public class RequestReader {
     }
 
     public String getContent(String path) throws IOException {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream input = classLoader.getResourceAsStream(path);
         String json = "";
         try {
-            InputStream fis = new FileInputStream(path);
-            json = readFromInputStream(fis);
+            json = readFromInputStream(input);
         } catch (IOException error) {
             System.out.println(error);
         }

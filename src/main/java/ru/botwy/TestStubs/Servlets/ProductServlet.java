@@ -31,8 +31,6 @@ public class ProductServlet extends HttpServlet {
             Product product = products[i];
             if (product == null) { return; }
 
-            System.out.println(product.getName());
-
             ProductDTO productDTO = new ProductDTO();
             productDTO.setCode(product.getCode());
             productDTO.setName(product.getName());

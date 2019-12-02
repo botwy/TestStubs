@@ -21,14 +21,14 @@ public class Storage {
     private Storage() {
         ReentrantReadWriteLock rwLock =  new ReentrantReadWriteLock();
         this.readLock = rwLock.readLock();
-        this.writeLock =rwLock.writeLock();
+        this.writeLock = rwLock.writeLock();
         fillByStubs();
     }
 
     private void fillByStubs() {
         try {
             JsonConverter converter = new JsonConverterImpl();
-            String json = RequestReader.shared.getContent("WEB-INF/productStub.json");
+            String json = RequestReader.shared.getContent("productStub.json");
             ProductDTO[] dtos = converter.fromJsonArray(json);
 
             for (ProductDTO dto : dtos) {
